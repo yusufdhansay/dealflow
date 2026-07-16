@@ -1,0 +1,14 @@
+{
+  "timestamp": 1784186139328,
+  "data": {
+    "symbol": "AMZN",
+    "companyName": "Amazon.com, Inc.",
+    "evToEBITDATTM": 15.1,
+    "evToSalesTTM": 3.8,
+    "peRatioTTM": 30,
+    "grossProfitMarginTTM": 0.506,
+    "revenueGrowth": 0.124,
+    "marketCap": 0,
+    "enterpriseValue": 2850702
+  }
+}

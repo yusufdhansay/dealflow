@@ -1,0 +1,74 @@
+{
+  "timestamp": 1783109299400,
+  "data": {
+    "target": {
+      "symbol": "ZOMATO.NS",
+      "companyName": "Zomato Limited",
+      "evToEBITDATTM": 35.6,
+      "evToSalesTTM": 2.5,
+      "peRatioTTM": 85.9,
+      "grossProfitMarginTTM": 0.23,
+      "revenueGrowth": 0.12,
+      "marketCap": 150000,
+      "enterpriseValue": 170000
+    },
+    "peers": [
+      {
+        "symbol": "SWIGGY.NS",
+        "companyName": "Zomato's competitor Swiggy",
+        "evToEBITDATTM": 30.8,
+        "evToSalesTTM": 2.2,
+        "peRatioTTM": 70.1,
+        "grossProfitMarginTTM": 0.21,
+        "revenueGrowth": 0.11,
+        "marketCap": 120000,
+        "enterpriseValue": 110000
+      },
+      {
+        "symbol": "HALDIRAM.NS",
+        "companyName": "Haldiram's",
+        "evToEBITDATTM": 25.9,
+        "evToSalesTTM": 1.8,
+        "peRatioTTM": 55.6,
+        "grossProfitMarginTTM": 0.19,
+        "revenueGrowth": 0.09,
+        "marketCap": 90000,
+        "enterpriseValue": 80000
+      },
+      {
+        "symbol": "JUBILANTFOOD.NS",
+        "companyName": "Jubilant FoodWorks",
+        "evToEBITDATTM": 22.1,
+        "evToSalesTTM": 1.6,
+        "peRatioTTM": 48.3,
+        "grossProfitMarginTTM": 0.17,
+        "revenueGrowth": 0.08,
+        "marketCap": 80000,
+        "enterpriseValue": 70000
+      }
+    ],
+    "sector": "Consumer",
+    "source": "ai_fallback",
+    "aggregates": {
+      "evToEBITDA": {
+        "min": 22.1,
+        "max": 30.8,
+        "mean": 26.3,
+        "median": 25.9
+      },
+      "evToSales": {
+        "min": 1.6,
+        "max": 2.2,
+        "mean": 1.9,
+        "median": 1.8
+      },
+      "peRatio": {
+        "min": 48.3,
+        "max": 70.1,
+        "mean": 58,
+        "median": 55.6
+      }
+    },
+    "message": "FMP API unavailable for ZOMATO.NS. comps generated dynamically via Llama-3.1."
+  }
+}

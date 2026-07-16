@@ -1,0 +1,63 @@
+{
+  "timestamp": 1783109360480,
+  "data": {
+    "target": {
+      "symbol": "BHEL.NS",
+      "companyName": "Bharat Heavy Electricals Limited",
+      "evToEBITDATTM": 8.5,
+      "evToSalesTTM": 1.2,
+      "peRatioTTM": 12.8,
+      "grossProfitMarginTTM": 0.23,
+      "revenueGrowth": 0.02,
+      "marketCap": 25000,
+      "enterpriseValue": 28000
+    },
+    "peers": [
+      {
+        "symbol": "L&T.NS",
+        "companyName": "Larsen & Toubro Limited",
+        "evToEBITDATTM": 10.8,
+        "evToSalesTTM": 1.5,
+        "peRatioTTM": 15.5,
+        "grossProfitMarginTTM": 0.25,
+        "revenueGrowth": 0.03,
+        "marketCap": 18000,
+        "enterpriseValue": 19500
+      },
+      {
+        "symbol": "AIAENGG.NS",
+        "companyName": "AIA Engineering Limited",
+        "evToEBITDATTM": 12.2,
+        "evToSalesTTM": 1.8,
+        "peRatioTTM": 18.2,
+        "grossProfitMarginTTM": 0.28,
+        "revenueGrowth": 0.05,
+        "marketCap": 12000,
+        "enterpriseValue": 13500
+      }
+    ],
+    "sector": "Industrials",
+    "source": "ai_fallback",
+    "aggregates": {
+      "evToEBITDA": {
+        "min": 10.8,
+        "max": 12.2,
+        "mean": 11.5,
+        "median": 11.5
+      },
+      "evToSales": {
+        "min": 1.5,
+        "max": 1.8,
+        "mean": 1.7,
+        "median": 1.7
+      },
+      "peRatio": {
+        "min": 15.5,
+        "max": 18.2,
+        "mean": 16.9,
+        "median": 16.9
+      }
+    },
+    "message": "FMP API unavailable for BHEL. comps generated dynamically via Llama-3.1."
+  }
+}

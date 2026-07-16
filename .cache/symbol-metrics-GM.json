@@ -1,0 +1,14 @@
+{
+  "timestamp": 1783096632622,
+  "data": {
+    "symbol": "GM",
+    "companyName": "General Motors Company",
+    "evToEBITDATTM": 11.4,
+    "evToSalesTTM": 1,
+    "peRatioTTM": 29.8,
+    "grossProfitMarginTTM": 0.061,
+    "revenueGrowth": -0.013,
+    "marketCap": 0,
+    "enterpriseValue": 176483
+  }
+}

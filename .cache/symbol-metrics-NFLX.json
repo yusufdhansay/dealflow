@@ -1,0 +1,14 @@
+{
+  "timestamp": 1783096604849,
+  "data": {
+    "symbol": "NFLX",
+    "companyName": "Netflix, Inc.",
+    "evToEBITDATTM": 9.7,
+    "evToSalesTTM": 7.1,
+    "peRatioTTM": 24.6,
+    "grossProfitMarginTTM": 0.49,
+    "revenueGrowth": 0.159,
+    "marketCap": 0,
+    "enterpriseValue": 332084
+  }
+}

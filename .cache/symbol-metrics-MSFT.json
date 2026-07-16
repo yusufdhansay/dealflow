@@ -1,0 +1,14 @@
+{
+  "timestamp": 1784186139698,
+  "data": {
+    "symbol": "MSFT",
+    "companyName": "Microsoft Corporation",
+    "evToEBITDATTM": 15.1,
+    "evToSalesTTM": 9.5,
+    "peRatioTTM": 23.5,
+    "grossProfitMarginTTM": 0.683,
+    "revenueGrowth": 0.149,
+    "marketCap": 0,
+    "enterpriseValue": 3032237
+  }
+}

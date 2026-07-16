@@ -1,0 +1,14 @@
+{
+  "timestamp": 1783096632404,
+  "data": {
+    "symbol": "TSLA",
+    "companyName": "Tesla, Inc.",
+    "evToEBITDATTM": 121.8,
+    "evToSalesTTM": 15,
+    "peRatioTTM": 326.9,
+    "grossProfitMarginTTM": 0.191,
+    "revenueGrowth": -0.029,
+    "marketCap": 0,
+    "enterpriseValue": 1470314
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "timestamp": 1783096606102,
+  "data": {
+    "target": {
+      "symbol": "AAPL",
+      "companyName": "Apple Inc.",
+      "evToEBITDATTM": 28.6,
+      "evToSalesTTM": 10.1,
+      "peRatioTTM": 37.2,
+      "grossProfitMarginTTM": 0.479,
+      "revenueGrowth": 0.064,
+      "marketCap": 0,
+      "enterpriseValue": 4581342
+    },
+    "peers": [
+      {
+        "symbol": "MSFT",
+        "companyName": "Microsoft Corporation",
+        "evToEBITDATTM": 14.6,
+        "evToSalesTTM": 9.2,
+        "peRatioTTM": 23.2,
+        "grossProfitMarginTTM": 0.683,
+        "revenueGrowth": 0.149,
+        "marketCap": 0,
+        "enterpriseValue": 2925588
+      },
+      {
+        "symbol": "GOOGL",
+        "companyName": "Alphabet Inc.",
+        "evToEBITDATTM": 20.1,
+        "evToSalesTTM": 10.4,
+        "peRatioTTM": 27.2,
+        "grossProfitMarginTTM": 0.604,
+        "revenueGrowth": 0.151,
+        "marketCap": 0,
+        "enterpriseValue": 4405486
+      },
+      {
+        "symbol": "AMZN",
+        "companyName": "Amazon.com, Inc.",
+        "evToEBITDATTM": 14.4,
+        "evToSalesTTM": 3.7,
+        "peRatioTTM": 28.6,
+        "grossProfitMarginTTM": 0.506,
+        "revenueGrowth": 0.124,
+        "marketCap": 0,
+        "enterpriseValue": 2718497
+      },
+      {
+        "symbol": "META",
+        "companyName": "Meta Platforms, Inc.",
+        "evToEBITDATTM": 13.6,
+        "evToSalesTTM": 7.2,
+        "peRatioTTM": 20.8,
+        "grossProfitMarginTTM": 0.819,
+        "revenueGrowth": 0.222,
+        "marketCap": 0,
+        "enterpriseValue": 1542990
+      },
+      {
+        "symbol": "NVDA",
+        "companyName": "NVIDIA Corporation",
+        "evToEBITDATTM": 24.5,
+        "evToSalesTTM": 18.6,
+        "peRatioTTM": 29.7,
+        "grossProfitMarginTTM": 0.741,
+        "revenueGrowth": 0.655,
+        "marketCap": 0,
+        "enterpriseValue": 4718554
+      },
+      {
+        "symbol": "NFLX",
+        "companyName": "Netflix, Inc.",
+        "evToEBITDATTM": 9.7,
+        "evToSalesTTM": 7.1,
+        "peRatioTTM": 24.6,
+        "grossProfitMarginTTM": 0.49,
+        "revenueGrowth": 0.159,
+        "marketCap": 0,
+        "enterpriseValue": 332084
+      }
+    ],
+    "sector": "Technology",
+    "aggregates": {
+      "evToEBITDA": {
+        "min": 9.7,
+        "max": 24.5,
+        "mean": 16.2,
+        "median": 14.5
+      },
+      "evToSales": {
+        "min": 3.7,
+        "max": 18.6,
+        "mean": 9.4,
+        "median": 8.2
+      },
+      "peRatio": {
+        "min": 20.8,
+        "max": 29.7,
+        "mean": 25.7,
+        "median": 25.9
+      }
+    },
+    "precedentDeals": [
+      {
+        "target": "Figma",
+        "acquirer": "Adobe",
+        "year": 2022,
+        "dealSize": 20000,
+        "evToEBITDA": 100,
+        "evToRevenue": 50,
+        "description": "Design software platform (terminated due to regulatory pressure, but multiples remain benchmark)"
+      },
+      {
+        "target": "Activision Blizzard",
+        "acquirer": "Microsoft",
+        "year": 2023,
+        "dealSize": 68700,
+        "evToEBITDA": 31.8,
+        "evToRevenue": 9.1,
+        "description": "Gaming publisher consolidation"
+      },
+      {
+        "target": "Slack Technologies",
+        "acquirer": "Salesforce",
+        "year": 2021,
+        "dealSize": 27700,
+        "evToEBITDA": 85.4,
+        "evToRevenue": 27.5,
+        "description": "Enterprise collaboration software integration"
+      },
+      {
+        "target": "VMware",
+        "acquirer": "Broadcom",
+        "year": 2023,
+        "dealSize": 61000,
+        "evToEBITDA": 20.3,
+        "evToRevenue": 4.8,
+        "description": "Enterprise virtualization software acquisition"
+      },
+      {
+        "target": "Splunk",
+        "acquirer": "Cisco Systems",
+        "year": 2024,
+        "dealSize": 28000,
+        "evToEBITDA": 30.5,
+        "evToRevenue": 7.2,
+        "description": "Observability and cybersecurity platform"
+      },
+      {
+        "target": "Ansys",
+        "acquirer": "Synopsys",
+        "year": 2024,
+        "dealSize": 35000,
+        "evToEBITDA": 41.2,
+        "evToRevenue": 15.6,
+        "description": "Engineering simulation software"
+      }
+    ],
+    "source": "api"
+  }
+}

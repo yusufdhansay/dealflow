@@ -1,0 +1,14 @@
+{
+  "timestamp": 1784186139697,
+  "data": {
+    "symbol": "AAPL",
+    "companyName": "Apple Inc.",
+    "evToEBITDATTM": 30.3,
+    "evToSalesTTM": 10.8,
+    "peRatioTTM": 39.5,
+    "grossProfitMarginTTM": 0.479,
+    "revenueGrowth": 0.064,
+    "marketCap": 0,
+    "enterpriseValue": 4858492
+  }
+}

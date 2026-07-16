@@ -1,0 +1,14 @@
+{
+  "timestamp": 1783096632400,
+  "data": {
+    "symbol": "RIVN",
+    "companyName": "Rivian Automotive, Inc.",
+    "evToEBITDATTM": -11,
+    "evToSalesTTM": 4.9,
+    "peRatioTTM": -6.4,
+    "grossProfitMarginTTM": -0.017,
+    "revenueGrowth": 0.084,
+    "marketCap": 0,
+    "enterpriseValue": 27140
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "timestamp": 1784186139274,
+  "data": {
+    "symbol": "NVDA",
+    "companyName": "NVIDIA Corporation",
+    "evToEBITDATTM": 26.7,
+    "evToSalesTTM": 20.3,
+    "peRatioTTM": 32.4,
+    "grossProfitMarginTTM": 0.741,
+    "revenueGrowth": 0.655,
+    "marketCap": 0,
+    "enterpriseValue": 5146540
+  }
+}
