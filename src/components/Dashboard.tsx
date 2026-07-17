@@ -1136,7 +1136,7 @@ export default function Dashboard() {
                       <th key={i} className="p-3 border-r border-hairline last:border-r-0">
                         {cell.exitMultiple.toFixed(1)}x
                         <span className="block text-[10px] font-normal text-mute">
-                          ({(cell.exitMultiple - lboInputs.entryMultiple) >= 0 ? '+' : ''}{(cell.exitMultiple - lboInputs.entryMultiple).toFixed(1)}x)
+                          ({(cell.exitMultiple - lboInputs.exitMultiple) >= 0 ? '+' : ''}{(cell.exitMultiple - lboInputs.exitMultiple).toFixed(1)}x)
                         </span>
                       </th>
                     ))}
@@ -1151,8 +1151,8 @@ export default function Dashboard() {
                       </td>
                       {/* Cells */}
                       {row.map((cell, colIndex) => {
-                        const isBaseMultiple = cell.exitMultiple === lboInputs.exitMultiple;
-                        const isBaseLeverage = cell.leverageMultiple === lboInputs.leverageMultiple;
+                        const isBaseMultiple = Math.abs(cell.exitMultiple - lboInputs.exitMultiple) < 0.05;
+                        const isBaseLeverage = Math.abs(cell.leverageMultiple - lboInputs.leverageMultiple) < 0.05;
                         const isBaseCase = isBaseMultiple && isBaseLeverage;
 
                         // Cell color logic based on IRR
@@ -1262,7 +1262,7 @@ export default function Dashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {compsData.precedentDeals.map((deal: any, index: number) => (
+                    {(compsData.precedentDeals || []).map((deal: any, index: number) => (
                       <tr key={index}>
                         <td className="font-mono text-mute">{deal.year}</td>
                         <td className="font-semibold text-ink">{deal.target}</td>

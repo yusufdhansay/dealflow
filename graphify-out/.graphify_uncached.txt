@@ -1,0 +1,9 @@
+/Users/yusufamin/dealflow/AGENTS.md
+/Users/yusufamin/dealflow/CLAUDE.md
+/Users/yusufamin/dealflow/DESIGN.md
+/Users/yusufamin/dealflow/README.md
+/Users/yusufamin/dealflow/public/file.svg
+/Users/yusufamin/dealflow/public/globe.svg
+/Users/yusufamin/dealflow/public/next.svg
+/Users/yusufamin/dealflow/public/vercel.svg
+/Users/yusufamin/dealflow/public/window.svg

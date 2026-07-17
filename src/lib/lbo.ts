@@ -172,16 +172,25 @@ export function runLBOModel(inputs: LBOInputs): LBOOutputs {
 
 export function generateSensitivityMatrix(
   inputs: LBOInputs,
-  leverageRange = [3, 4, 5, 6, 7],
-  multipleOffsetRange = [-2, -1, 0, 1, 2] // exit multiple offsets relative to entry multiple
+  leverageOffsetRange = [-2, -1, 0, 1, 2], // leverage offsets relative to current leverage
+  multipleOffsetRange = [-2, -1, 0, 1, 2] // exit multiple offsets relative to current exit multiple
 ): SensitivityCell[][] {
   const matrix: SensitivityCell[][] = [];
 
-  for (const leverage of leverageRange) {
+  // Cap leverage below the entry multiple (mirrors the UI slider cap) so
+  // entry equity never collapses to the sentinel floor and distorts IRR/MOIC.
+  const maxLeverage = Math.max(1, inputs.entryMultiple - 1);
+  const leverageLevels = Array.from(new Set(
+    leverageOffsetRange.map(offset =>
+      Math.round(Math.min(maxLeverage, Math.max(1, inputs.leverageMultiple + offset)) * 10) / 10
+    )
+  ));
+
+  for (const leverage of leverageLevels) {
     const row: SensitivityCell[] = [];
     for (const offset of multipleOffsetRange) {
-      const exitMultiple = inputs.entryMultiple + offset;
-      
+      const exitMultiple = inputs.exitMultiple + offset;
+
       const cellInputs: LBOInputs = {
         ...inputs,
         leverageMultiple: leverage,
@@ -189,7 +198,7 @@ export function generateSensitivityMatrix(
       };
 
       const result = runLBOModel(cellInputs);
-      
+
       row.push({
         exitMultiple: cellInputs.exitMultiple,
         leverageMultiple: leverage,

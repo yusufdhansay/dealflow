@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Groq } from 'groq-sdk';
+import { runLBOModel, LBOInputs, YearForecast } from '@/lib/lbo';
 
 export async function POST(req: NextRequest) {
+  // Parse the body once up front — the request stream can only be consumed
+  // a single time, so the error fallback below reuses this parsed object.
+  let body: any;
   try {
-    const body = await req.json();
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+  }
+
+  try {
     const { target, sector, aggregates, lboInputs, lboOutputs, cheapRichFlag, precedentMedian, apiKeyOverride } = body;
 
     const apiKey = apiKeyOverride || process.env.GROQ_API_KEY || '';
@@ -88,7 +97,6 @@ Make sure the output is professional, reads like actual Private Equity memo text
     
     // In case of any API error, run fallback generator
     try {
-      const body = await req.json();
       const { target, sector, aggregates, lboInputs, lboOutputs, cheapRichFlag, precedentMedian } = body;
       const targetEV_EBITDA = target.evToEBITDATTM;
       const peersMedianEV_EBITDA = aggregates?.evToEBITDA?.median || 12.0;
@@ -128,7 +136,26 @@ function generateDynamicFinancialMemo(
 ): string {
   const irr = outputs.irr * 100;
   const moic = outputs.moic;
-  
+
+  // Derive real metrics from the actual LBO forecast instead of fabricating them
+  const forecastYears: YearForecast[] = (outputs.forecast || []).filter((f: YearForecast) => f.year > 0);
+  const cumulativeFCF = forecastYears.reduce((sum: number, f: YearForecast) => sum + f.fcf, 0);
+  const year1 = forecastYears[0];
+  const year1Coverage = year1 && year1.interest > 0 ? year1.ebitda / year1.interest : 0;
+  const debtPaydownPct = outputs.entryDebt > 0
+    ? Math.max(0, (1 - outputs.exitDebt / outputs.entryDebt)) * 100
+    : 0;
+  const avgCashConversion = forecastYears.length > 0
+    ? (forecastYears.reduce((sum: number, f: YearForecast) => sum + (f.ebitda > 0 ? f.fcf / f.ebitda : 0), 0) / forecastYears.length) * 100
+    : 0;
+
+  // Re-run the model at a 2.0x contracted exit multiple for the real downside case
+  const contractedExit = Math.max(1, inputs.exitMultiple - 2);
+  const downsideOutputs = runLBOModel({ ...(inputs as LBOInputs), exitMultiple: contractedExit });
+  const downsideIRR = downsideOutputs.irr * 100;
+
+  const memoDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
   let rec = "BUY";
   let recNarrative = "";
   if (irr >= 20) {
@@ -153,7 +180,7 @@ function generateDynamicFinancialMemo(
 
   return `# INVESTMENT COMMITTEE MEMORANDUM
 
-**Date:** July 3, 2026  
+**Date:** ${memoDate}
 **To:** Investment Committee  
 **From:** Private Equity Associate Team  
 **Subject:** Acquisition of ${target.companyName} (${target.symbol})  
@@ -178,18 +205,18 @@ Relative to precedent M&A transactions in the ${sector} sector (median deal mult
 ---
 
 ### 3. Debt Serviceability & FCF Performance
-Under the proposed ${inputs.leverageMultiple.toFixed(1)}x EBITDA leverage structure ($${outputs.entryDebt.toLocaleString()}M in initial senior debt), the target company displays robust debt serviceability. 
-- **Interest Coverage:** The initial Year 1 interest coverage ratio (EBITDA / Interest Expense) is **${(target.evToEBITDATTM / 2).toFixed(1)}x**, providing a significant cushion.
-- **Deleveraging Profile:** Over the ${inputs.holdPeriod}-year hold period, the target generates cumulative Free Cash Flow of **$${(outputs.entryDebt * 0.65).toFixed(0)}M**, allowing us to pay down approximately **${((1 - (outputs.exitDebt / outputs.entryDebt)) * 100).toFixed(0)}%** of the opening debt balance by exit. 
-- **Cash Conversion:** EBITDA-to-FCF conversion averages **${(65 + (inputs.interestRate * -100)).toFixed(0)}%** annually, driven by low capital intensity (modeled at ${(inputs.capexPercentOfEBITDA * 100).toFixed(0)}% of EBITDA) and favorable working capital dynamics.
+Under the proposed ${inputs.leverageMultiple.toFixed(1)}x EBITDA leverage structure ($${outputs.entryDebt.toLocaleString()}M in initial senior debt), the target company displays robust debt serviceability.
+- **Interest Coverage:** The initial Year 1 interest coverage ratio (EBITDA / Interest Expense) is **${year1Coverage.toFixed(1)}x**, providing a significant cushion.
+- **Deleveraging Profile:** Over the ${inputs.holdPeriod}-year hold period, the target generates cumulative Free Cash Flow of **$${Math.round(cumulativeFCF).toLocaleString()}M**, allowing us to pay down approximately **${debtPaydownPct.toFixed(0)}%** of the opening debt balance by exit.
+- **Cash Conversion:** EBITDA-to-FCF conversion averages **${avgCashConversion.toFixed(0)}%** annually, driven by capital intensity modeled at ${(inputs.capexPercentOfEBITDA * 100).toFixed(0)}% of EBITDA and disciplined working capital management.
 
 ---
 
 ### 4. Key Risks & Risk Mitigants
 - **Risk 1: Interest Rate & Leverage Constraint.** Servicing debt under a ${(inputs.interestRate * 100).toFixed(1)}% interest rate leaves the business vulnerable to macroeconomic shocks.  
   *Mitigant:* We will execute an interest rate swap to hedge 75% of the floating debt exposure into fixed rates. Furthermore, the company's defensive contract structure guarantees stable cash flows even in recessionary environments.
-- **Risk 2: Exit Multiple Contraction.** The ${sector} sector is currently trading at elevated levels, presenting risk of sector-wide valuation compression by Year ${inputs.holdPeriod}.  
-  *Mitigant:* Our returns underwriting does not rely on multiple expansion. As shown in our sensitivity grid, even if the multiple contracts by 2.0x to ${(inputs.entryMultiple - 2).toFixed(1)}x, the deal still generates an IRR of **${(irr - 6).toFixed(1)}%** due to steady operational growth and cumulative debt paydown.
+- **Risk 2: Exit Multiple Contraction.** The ${sector} sector is currently trading at elevated levels, presenting risk of sector-wide valuation compression by Year ${inputs.holdPeriod}.
+  *Mitigant:* Our returns underwriting does not rely on multiple expansion. As shown in our sensitivity grid, even if the exit multiple contracts by 2.0x to ${contractedExit.toFixed(1)}x, the deal generates an IRR of **${downsideIRR.toFixed(1)}%** due to steady operational growth and cumulative debt paydown.
 - **Risk 3: Growth Assumptions Execution.** A shortfall in the modeled ${(inputs.ebitdaGrowth * 100).toFixed(1)}% EBITDA growth rate would impair returns.  
   *Mitigant:* The management team has a proven track record of executing add-on acquisitions. We have identified three immediate synergy-rich targets that can support growth even if organic sales slow.
 `;

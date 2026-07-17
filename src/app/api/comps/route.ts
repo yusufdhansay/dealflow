@@ -89,9 +89,12 @@ export async function GET(req: NextRequest) {
         console.log(`FMP failed for ${ticker}. Attempting Groq AI fallback...`);
         const aiComps = await fetchPeersFromGroq(ticker, groqKey);
         const aggregates = calculateAggregates(aiComps.peers);
+        // AI fallback doesn't generate precedent deals — pull the sector-curated set
+        const fallbackInfo = getFallbackData(ticker);
         const responseData = {
           ...aiComps,
           aggregates,
+          precedentDeals: fallbackInfo.precedentDeals,
           message: `FMP API unavailable for ${ticker}. comps generated dynamically via Llama-3.1.`
         };
         // Store in cache
