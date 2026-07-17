@@ -5,10 +5,10 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, 
   AreaChart, Area, Legend, CartesianGrid 
 } from 'recharts';
-import { 
-  Search, Sliders, ChevronRight, CheckCircle2, AlertTriangle, 
+import {
+  Search, Sliders, ChevronRight, CheckCircle2, AlertTriangle,
   FileText, TrendingUp, DollarSign, Database, ShieldAlert,
-  Loader2, Printer, Settings, RefreshCw, Layers
+  Loader2, Printer, Settings, RefreshCw, Layers, Sun, Moon
 } from 'lucide-react';
 import { LBOInputs, runLBOModel, generateSensitivityMatrix } from '@/lib/lbo';
 
@@ -19,6 +19,7 @@ export default function Dashboard() {
   const [fmpKey, setFmpKey] = useState('');
   const [groqKey, setGroqKey] = useState('');
   const [showSettings, setShowSettings] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const [activeTab, setActiveTab] = useState<'comps' | 'lbo' | 'sensitivities' | 'precedents' | 'memo'>('comps');
   const [mounted, setMounted] = useState(false);
 
@@ -110,12 +111,22 @@ export default function Dashboard() {
   // SSR safety
   useEffect(() => {
     setMounted(true);
+    // Sync theme state with the class applied by the pre-paint script in layout.tsx
+    setIsDark(document.documentElement.classList.contains('dark'));
     // Load local storage keys
     const storedFmp = localStorage.getItem('fmp_api_key');
     const storedGroq = localStorage.getItem('groq_api_key');
     if (storedFmp) setFmpKey(storedFmp);
     if (storedGroq) setGroqKey(storedGroq);
   }, []);
+
+  // Toggle color theme and persist choice
+  const toggleTheme = () => {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
+  };
 
   // Fetch Comps Data
   const fetchComps = async (searchTicker: string) => {
@@ -401,6 +412,14 @@ export default function Dashboard() {
                 >
                   <Settings className="h-4.5 w-4.5" />
                 </button>
+                <button
+                  onClick={toggleTheme}
+                  className="p-2 border border-hairline rounded-sm hover:bg-canvas-soft text-body hover:text-ink h-[38px] w-[38px] flex items-center justify-center cursor-pointer"
+                  title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                  aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                >
+                  {mounted && isDark ? <Sun className="h-4.5 w-4.5" /> : <Moon className="h-4.5 w-4.5" />}
+                </button>
               </div>
             ) : (
               /* Private Target Inputs Form */
@@ -460,8 +479,8 @@ export default function Dashboard() {
                     className="w-16 border border-hairline rounded-sm px-2 py-1 bg-canvas text-ink text-xs focus:outline-none focus:border-hairline-strong font-mono"
                   />
                 </div>
-                {/* Settings gear */}
-                <div className="flex items-end h-[38px] justify-center mt-auto">
+                {/* Settings gear + theme toggle */}
+                <div className="flex items-end h-[38px] justify-center mt-auto gap-1.5">
                   <button
                     onClick={() => setShowSettings(true)}
                     className="p-1.5 border border-hairline rounded-sm hover:bg-canvas-soft text-body hover:text-ink h-7 w-7 flex items-center justify-center cursor-pointer"
@@ -469,6 +488,14 @@ export default function Dashboard() {
                     aria-label="API Settings"
                   >
                     <Settings className="h-3.5 w-3.5" />
+                  </button>
+                  <button
+                    onClick={toggleTheme}
+                    className="p-1.5 border border-hairline rounded-sm hover:bg-canvas-soft text-body hover:text-ink h-7 w-7 flex items-center justify-center cursor-pointer"
+                    title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                    aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                  >
+                    {mounted && isDark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
                   </button>
                 </div>
               </div>

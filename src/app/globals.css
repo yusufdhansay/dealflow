@@ -89,6 +89,49 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* Dark theme token overrides — scoped to screen so Print/PDF (memo) always renders light.
+   Utilities compile to var(--color-*), so overriding the variables restyles everything. */
+@media screen {
+  .dark {
+    --color-primary: #ededed;
+    --color-on-primary: #0a0a0a;
+    --color-ink: #ededed;
+    --color-body: #a8a8a8;
+    --color-mute: #8f8f8f; /* 4.9:1 on #111 */
+    --color-hairline: #2a2a2a;
+    --color-hairline-strong: #525252;
+    --color-canvas: #0a0a0a;
+    --color-canvas-soft: #111111;
+    --color-canvas-soft-2: #1a1a1a;
+    --color-link: #52a8ff;
+    --color-link-deep: #79bbff;
+    --color-link-bg-soft: #10233d;
+    --color-success: #52a8ff; /* 7.4:1 on #0a0a0a */
+    --color-error: #ff6166;
+    --color-error-soft: #3c1618;
+    --color-error-deep: #ff8589;
+    --color-warning: #f5a623;
+    --color-warning-soft: #331c00;
+    --color-warning-deep: #f5b955;
+
+    /* Primary card inverts to light in dark mode, so its cyan accents must go dark */
+    --color-cyan-soft: #0e7490;
+    --color-cyan-deep: #0891b2;
+  }
+
+  .dark .mesh-gradient-bg {
+    opacity: 0.1;
+  }
+}
+
 /* Visible keyboard focus for interactive elements (inputs opt out via focus:outline-none + border treatment) */
 button:focus-visible,
 select:focus-visible,
