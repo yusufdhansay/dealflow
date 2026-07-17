@@ -11,7 +11,7 @@
   --color-on-primary: #ffffff;
   --color-ink: #171717;
   --color-body: #4d4d4d;
-  --color-mute: #888888;
+  --color-mute: #6b6b6b; /* 5.3:1 on white — WCAG AA for the small caption text this is used on */
   --color-hairline: #ebebeb;
   --color-hairline-strong: #a1a1a1;
   --color-canvas: #ffffff;
@@ -20,13 +20,17 @@
   --color-link: #0070f3;
   --color-link-deep: #0761d1;
   --color-link-bg-soft: #d3e5ff;
-  --color-success: #0070f3;
+  --color-success: #0761d1; /* 5.8:1 on white — passes AA for small mono table figures */
   --color-error: #ee0000;
   --color-error-soft: #f7d4d6;
   --color-error-deep: #c50000;
   --color-warning: #f5a623;
   --color-warning-soft: #ffefcf;
   --color-warning-deep: #ab570a;
+
+  /* Cyan accents used on the dark primary valuation card */
+  --color-cyan-soft: #a5f3fc;
+  --color-cyan-deep: #22d3ee;
 
   /* Accent Gradient Colors */
   --color-develop-start: #007cf0;
@@ -35,6 +39,25 @@
   --color-preview-end: #ff0080;
   --color-ship-start: #ff4d4d;
   --color-ship-end: #f9cb28;
+
+  /* Typography scale (text-display-* / text-body-* utilities) */
+  --text-display-xl: 3rem;
+  --text-display-xl--line-height: 1.1;
+  --text-display-lg: 2.25rem;
+  --text-display-lg--line-height: 1.15;
+  --text-display-md: 1.5rem;
+  --text-display-md--line-height: 1.2;
+  --text-display-sm: 1.25rem;
+  --text-display-sm--line-height: 1.3;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.5;
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.5;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+  --text-body-sm-strong: 0.875rem;
+  --text-body-sm-strong--line-height: 1.5;
+  --text-body-sm-strong--font-weight: 600;
 
   /* Custom Border Radius */
   --radius-xs: 4px;
@@ -50,12 +73,28 @@
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 }
 
+/* Monospace caption labels (KPI card headers, form labels, metadata rows) */
+@utility text-caption-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+}
+
 body {
   background-color: var(--color-canvas-soft);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Visible keyboard focus for interactive elements (inputs opt out via focus:outline-none + border treatment) */
+button:focus-visible,
+select:focus-visible,
+input[type="range"]:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
 }
 
 /* Mesh gradient styling utility */
@@ -90,6 +129,20 @@ body {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+/* Respect users who opt out of motion */
+@media (prefers-reduced-motion: reduce) {
+  .mesh-gradient-bg {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
 

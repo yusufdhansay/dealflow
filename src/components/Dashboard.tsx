@@ -393,10 +393,11 @@ export default function Dashboard() {
                 >
                   {loading ? <Loader2 className="h-4.5 w-4.5 animate-spin" /> : 'Screen'}
                 </button>
-                <button 
+                <button
                   onClick={() => setShowSettings(true)}
                   className="p-2 border border-hairline rounded-sm hover:bg-canvas-soft text-body hover:text-ink h-[38px] w-[38px] flex items-center justify-center cursor-pointer"
                   title="API Settings"
+                  aria-label="API Settings"
                 >
                   <Settings className="h-4.5 w-4.5" />
                 </button>
@@ -461,10 +462,11 @@ export default function Dashboard() {
                 </div>
                 {/* Settings gear */}
                 <div className="flex items-end h-[38px] justify-center mt-auto">
-                  <button 
+                  <button
                     onClick={() => setShowSettings(true)}
                     className="p-1.5 border border-hairline rounded-sm hover:bg-canvas-soft text-body hover:text-ink h-7 w-7 flex items-center justify-center cursor-pointer"
                     title="API Settings"
+                    aria-label="API Settings"
                   >
                     <Settings className="h-3.5 w-3.5" />
                   </button>
@@ -818,6 +820,7 @@ export default function Dashboard() {
                     max={Math.round(lboInputs.targetEBITDA * 2)}
                     value={lboInputs.targetEBITDA}
                     onChange={(e) => setLboInputs(p => ({ ...p, targetEBITDA: Number(e.target.value) }))}
+                    aria-label="Starting EBITDA in millions"
                     className="w-full h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                 </div>
@@ -834,6 +837,7 @@ export default function Dashboard() {
                     step="0.5"
                     value={lboInputs.entryMultiple}
                     onChange={(e) => setLboInputs(p => ({ ...p, entryMultiple: Number(e.target.value) }))}
+                    aria-label="Entry EV/EBITDA multiple"
                     className="w-full h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                 </div>
@@ -850,6 +854,7 @@ export default function Dashboard() {
                     step="0.1"
                     value={lboInputs.leverageMultiple}
                     onChange={(e) => setLboInputs(p => ({ ...p, leverageMultiple: Number(e.target.value) }))}
+                    aria-label="Opening debt to EBITDA leverage"
                     className="w-full h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                   <span className="text-[9px] text-mute leading-none block mt-1">
@@ -869,6 +874,7 @@ export default function Dashboard() {
                     step="0.005"
                     value={lboInputs.interestRate}
                     onChange={(e) => setLboInputs(p => ({ ...p, interestRate: Number(e.target.value) }))}
+                    aria-label="Debt interest rate"
                     className="w-full h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                 </div>
@@ -885,6 +891,7 @@ export default function Dashboard() {
                     step="0.01"
                     value={lboInputs.ebitdaGrowth}
                     onChange={(e) => setLboInputs(p => ({ ...p, ebitdaGrowth: Number(e.target.value) }))}
+                    aria-label="Annual EBITDA growth"
                     className="w-full h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                 </div>
@@ -901,6 +908,7 @@ export default function Dashboard() {
                     step="0.01"
                     value={lboInputs.capexPercentOfEBITDA}
                     onChange={(e) => setLboInputs(p => ({ ...p, capexPercentOfEBITDA: Number(e.target.value) }))}
+                    aria-label="Capex percent of EBITDA"
                     className="w-full h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                 </div>
@@ -917,6 +925,7 @@ export default function Dashboard() {
                     step="0.01"
                     value={lboInputs.taxRate}
                     onChange={(e) => setLboInputs(p => ({ ...p, taxRate: Number(e.target.value) }))}
+                    aria-label="Corporate tax rate"
                     className="w-full h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                 </div>
@@ -933,6 +942,7 @@ export default function Dashboard() {
                     step="0.5"
                     value={lboInputs.exitMultiple}
                     onChange={(e) => setLboInputs(p => ({ ...p, exitMultiple: Number(e.target.value) }))}
+                    aria-label="Exit EV/EBITDA multiple"
                     className="w-full h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                 </div>
@@ -949,6 +959,7 @@ export default function Dashboard() {
                     step="1"
                     value={lboInputs.holdPeriod}
                     onChange={(e) => setLboInputs(p => ({ ...p, holdPeriod: Number(e.target.value) }))}
+                    aria-label="Hold period in years"
                     className="w-full h-1 bg-hairline rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                 </div>
